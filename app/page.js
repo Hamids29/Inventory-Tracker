@@ -1,10 +1,9 @@
 'use client'
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { initializeApp } from "firebase/app";
 import { Box, Typography } from "@mui/material";
 import { firestore } from "@/firebase";
-import { deleteDoc, setDoc } from "firebase/firestore";
+import {collection, getDocs, query} from "firebase/firestore";
 
 export default function Home() {
   const [inventory, setInventory] = useState([])
@@ -56,20 +55,14 @@ export default function Home() {
     useEffect(() =>{
       updateInventory()
     }, [])
+
+    const handleOpen = () => setOpen(true)
+    const handleClose =() => setOpen(false)
+
   return(
-    //hi
-   <Box> 
+   <Box width={"100vw"} height={"100vh"} display={"flex"}> 
    <Typography variant = "h1">Inventory Management</Typography>
-   {
-    inventory.forEach((item) =>{
-      console.log(item)
-      return(
-      <Box>
-      {item.name}
-      {item.count}
-      </Box>)
-    })
-   }
+
   </Box>
   )
 }
