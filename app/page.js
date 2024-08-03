@@ -27,6 +27,7 @@ export default function Home() {
       updateInventory()
     }, [])
   return(
+    //hi
    <Box> 
    <Typography variant = "h1">Inventory Management</Typography>
    {
