@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { Box, Typography } from "@mui/material";
 import { firestore } from "@/firebase";
+import { deleteDoc, setDoc } from "firebase/firestore";
 
 export default function Home() {
   const [inventory, setInventory] = useState([])
@@ -21,7 +22,22 @@ export default function Home() {
       })
     })
     setInventory(inventoryList)
-    console.log(inventoryList)
+    }
+    const removeItem = async (item) =>{
+      const docRef = doc(collection(firestore, 'inventory'), item)
+      const docSnap = await getDoc(docRef)
+
+      if(docSnap.exists()){
+        const {quantity} = docSnap.data()
+        if(quantity == 1){
+          await deleteDoc(docRef)
+        }
+        else{
+          await setDoc(docRef, {quantity: quantity -1})
+        }
+      }
+
+      await updateInventory()
     }
     useEffect(() =>{
       updateInventory()
