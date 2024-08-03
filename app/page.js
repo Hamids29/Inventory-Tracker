@@ -64,6 +64,7 @@ export default function Home() {
    <Box width={"100vw"} 
    height={"100vh"} 
    display={"flex"} 
+   flexDirection="column"
    justifyContent={"center"} 
    alignItems={"center"} 
    gap={2}
@@ -112,6 +113,11 @@ onClick={() =>{
 >
   Add New Item
 </Button>
+<Box border={"1px solid #333"} >
+  <Box width={"800px"} height={"100px"} bgcolor={"#ADD8E6"} >
+
   </Box>
+ </Box>
+</Box>
   )
 }
