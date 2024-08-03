@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Modal, TextField, Typography,Stack, Button } from "@mui/material";
 import { firestore } from "@/firebase";
 import {collection, getDocs, query} from "firebase/firestore";
 
@@ -68,11 +68,43 @@ export default function Home() {
    alignItems={"center"} 
    gap={2}
    > 
-   <Modal open = {open} onClose = {handleClose }></Modal>
-   <Box position = "absolute" top = "50%" left = "50%"
-   ></Box>
+   <Modal open = {open} onClose={handleClose}> 
+   <Box
+   position={"absolute"}
+   top={"50%"}
+   left={"50%"}
+   width={500}
+   bgcolor= "white"
+   border="2px solid #000"
+   boxShadow={24}
+   p={4}
+   display={"flex"}
+   flexDirection={"column"}
+   gap={3}
+   sx={{
+    transform: 'translate(-50%, -50%)',
+   }}
+   >
+    <Typography variant = "h1"> Add Item</Typography>
+    <Stack width = "100%" direction={"row"} spacing={2}>
+      <TextField
+      variant = 'outlined'
+      fullWidth
+      value={itemName}
+      onChange={(e)=>{
+      setItemName(e.target.value)
+      }}
+      />
+      <Button variant="outlined"
+       onClick={()=>{
+        addItem(itemName)
+        setItemName('')
+        handleClose()
+      }}> Add </Button>
+    </Stack>
+   </Box>
+   </Modal>
    <Typography variant = "h1">Inventory Management</Typography>
-
   </Box>
   )
 }
