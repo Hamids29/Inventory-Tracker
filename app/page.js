@@ -22,6 +22,7 @@ export default function Home() {
     })
     setInventory(inventoryList)
     }
+
     const addItem = async (item) =>{
       const docRef = doc(collection(firestore, 'inventory'), item)
       const docSnap = await getDoc(docRef)
@@ -60,7 +61,16 @@ export default function Home() {
     const handleClose =() => setOpen(false)
 
   return(
-   <Box width={"100vw"} height={"100vh"} display={"flex"}> 
+   <Box width={"100vw"} 
+   height={"100vh"} 
+   display={"flex"} 
+   justifyContent={"center"} 
+   alignItems={"center"} 
+   gap={2}
+   > 
+   <Modal open = {open} onClose = {handleClose }></Modal>
+   <Box position = "absolute" top = "50%" left = "50%"
+   ></Box>
    <Typography variant = "h1">Inventory Management</Typography>
 
   </Box>
